@@ -1,0 +1,100 @@
+\section{Morphology}
+
+According to the Royal Spanish Academy (RAE), \textbf{morphology} is ``the part of grammar that studies the structure of words and their constituent elements''.
+
+Morphology studies how words decompose into indivisible parts, each with meaning. These minimal units are called \textbf{morphemes}.
+
+\begin{definition}[Morpheme]
+The minimal unit that composes a word and is capable of expressing meaning.
+\end{definition}
+
+\textbf{Example:} The word ``mujeres'' (women) contains two morphemes:
+\begin{itemize}
+    \item ``mujer'' (woman) --- the root
+    \item ``es'' --- indicates plural
+\end{itemize}
+
+\subsection{Grammatical Morphemes and Lexemes}
+
+A \textbf{grammatical morpheme} has grammatical meaning, such as:
+\begin{itemize}
+    \item Gender (masculine or feminine)
+    \item Number (singular or plural)
+    \item Person (e.g., third person singular)
+    \item Mood and tense (e.g., indicative mood, future tense)
+\end{itemize}
+
+In contrast, a \textbf{lexeme} is the morpheme that forms the root or invariant part of the word, providing the main lexical meaning.
+
+A \textbf{lemma} is the canonical form of a word (e.g., infinitive for verbs, singular for nouns) used as the dictionary entry.
+
+\begin{definition}[Lemma]
+The canonical or dictionary form of a word, used as the base form for all its inflected variants.
+\end{definition}
+
+\textbf{Example:} In ``mujeres'':
+\begin{itemize}
+    \item ``mujer'' is the lexeme (root with lexical meaning)
+    \item ``es'' is the grammatical morpheme (expresses plural number)
+    \item ``mujer'' is also the lemma (canonical form)
+\end{itemize}
+
+The singular form ``mujer'' contains:
+\begin{itemize}
+    \item The lexeme ``mujer''
+    \item A \textbf{zero morpheme} for singular number
+\end{itemize}
+
+\begin{definition}[Zero Morpheme]
+A grammatical morpheme without phonetic realization but with grammatical meaning.
+\end{definition}
+
+\subsection{Example: Complex Word Structure}
+
+The word ``cantábamos'' (we were singing) contains three morphemes:
+\begin{enumerate}
+    \item \textbf{Lexeme ``cant''}: Lexical meaning (the act of producing melodious sounds with the voice)
+    \item \textbf{Grammatical morpheme ``aba''}: Indicative mood, past tense
+    \item \textbf{Grammatical morpheme ``mos''}: First person plural
+\end{enumerate}
+
+The lemma for ``cantábamos'' is ``cantar'' (to sing).
+
+\subsection{Morphological Analysis Examples}
+
+Table~\ref{tab:morphology_examples} shows examples of morphological analysis, decomposing words into their lexemes, grammatical morphemes, and lemmas.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Word} & \textbf{Lexeme} & \textbf{Gram. Morpheme (1)} & \textbf{Gram. Morpheme (2)} & \textbf{Lemma} \\
+\midrule
+Cantábais & Cant & ába & Is & Cantar \\
+Casita & Cas & Ita & Zero (SG) & Casa \\
+Perros & Perr & O & S & Perro \\
+Vino & Vino & Zero (M) & Zero (SG) & Vino \\
+\bottomrule
+\end{tabular}
+\caption{Examples of morphological analysis in Spanish}
+\label{tab:morphology_examples}
+\end{table}
+
+\subsection{Computational Morphology}
+
+\textbf{Computational morphology} aims to automatically recognize the morphemes contained in a word.
+
+\textbf{Importance in NLP:}
+\begin{itemize}
+    \item \textbf{Search and retrieval}: When searching for ``pensar'' (to think), also recognize ``piénsalo'' (think about it), even though they don't share the same character sequence in the root
+    \item \textbf{Text generation}: Ensure grammatical agreement (e.g., gender and number between nouns and adjectives, person between verbs and subjects)
+\end{itemize}
+
+\subsection{English vs. Spanish Morphological Analysis}
+
+Morphological analysis in English (where most computational morphology research is conducted) is simpler than in Spanish because:
+\begin{itemize}
+    \item Spanish has many more variations in word endings
+    \item Spanish has more root alterations (stem changes)
+\end{itemize}
+

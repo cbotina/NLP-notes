@@ -1,0 +1,244 @@
+\section{Text Normalization Techniques}
+
+The compositionality principle, while not always sufficient for constructing meaning, is adequate for many text types and use cases. It enables transforming text into input variables for training machine learning models.
+
+For example, in sentiment analysis (classifying text as positive, negative, or neutral), a supervised model requires:
+\begin{itemize}
+    \item Annotated texts with sentiment categories
+    \item Input variables extracted from text following the compositionality principle (e.g., which words appear)
+\end{itemize}
+
+\begin{definition}[Text Normalization Pipeline]
+The transformation of text into its constituent elements for subsequent processing, following a normalization pipeline with distinct steps.
+\end{definition}
+
+\subsection{Step 1: Tokenization}
+
+\textbf{Tokenization} consists of decomposing a text string (e.g., a sentence) into its terms or components (e.g., the words that form it).
+
+\textbf{Example:} For the sentence:
+\begin{quote}
+``Después de estar estudiando 2 horas, he decidido estudiar 2 horas más.''
+\end{quote}
+
+The tokenization result is:
+\begin{quote}
+``Después'', ``de'', ``estar'', ``estudiando'', ``2'', ``horas'', ``he'', ``decidido'', ``estudiar'', ``2'', ``horas'', ``más''.
+\end{quote}
+
+This process typically:
+\begin{enumerate}
+    \item Removes punctuation marks (commas, periods)
+    \item Separates text into words based on whitespace
+    \item Produces an ordered list of words
+\end{enumerate}
+
+\begin{definition}[Tokenization]
+The process of separating text into smaller parts (tokens) such as words or phrase components.
+\end{definition}
+
+\subsubsection{Observations from Tokenization}
+
+After tokenization, several aspects emerge:
+\begin{itemize}
+    \item \textbf{Repeated words}: Some words appear multiple times (e.g., ``horas'')
+    \item \textbf{Capitalization}: First word may be capitalized (e.g., ``Después'')
+    \item \textbf{Numbers}: Non-word tokens appear (e.g., ``2'')
+    \item \textbf{Word variations}: Similar words with different forms (e.g., ``estudiando'' vs. ``estudiar'')
+\end{itemize}
+
+These aspects are addressed in subsequent normalization steps.
+
+\subsubsection{Limitations and Challenges}
+
+\textbf{Punctuation handling:} Simple punctuation removal is insufficient for:
+\begin{itemize}
+    \item Abbreviations: ``Dr.'', ``o'clock''
+    \item Possessives: ``doctor's'' (apostrophe 's)
+    \item Dates: ``2022-06-01''
+    \item Times: ``08:30''
+\end{itemize}
+
+\textbf{Solution:} Differentiate between punctuation types using:
+\begin{itemize}
+    \item Rules or heuristics
+    \item Databases for standardizing terms
+\end{itemize}
+
+\textbf{Proper nouns and compound words:} Multi-word expressions should remain as single tokens:
+\begin{itemize}
+    \item Proper nouns: ``Nueva York'' (not ``Nueva'' + ``York'')
+    \item Compound expressions: ``Estado del Arte'', ``a priori''
+\end{itemize}
+
+\textbf{Solution:} Two-level tokenization:
+\begin{enumerate}
+    \item \textbf{Low-level}: Initial tokenization (word-level)
+    \item \textbf{High-level}: Semantic tokenization (phrase-level)
+\end{enumerate}
+
+High-level tokenization can use:
+\begin{itemize}
+    \item Statistical approaches considering word co-occurrence
+    \item Named entity recognition
+    \item Phrase dictionaries
+\end{itemize}
+
+\subsubsection{Token Importance}
+
+From the compositionality perspective, not all tokens are equally important for a given task.
+
+\textbf{Example:} For sentiment analysis of:
+\begin{quote}
+``Estoy contento de haber comprado este libro.''
+\end{quote}
+
+Words like ``de'' and ``este'' provide little information for sentiment classification. This leads to the next normalization step.
+
+\subsection{Step 2: Stopword Removal}
+
+\textbf{Stopword removal} eliminates tokens that are very common and provide little information, such as articles, conjunctions, prepositions, and sometimes pronouns.
+
+\begin{definition}[Stopword Removal]
+A technique used to remove tokens that are very common and provide little information, such as articles, conjunctions, or prepositions when those tokens represent words.
+\end{definition}
+
+\textbf{Types of stopwords:}
+\begin{itemize}
+    \item Articles (e.g., ``el'', ``la'', ``un'', ``una'')
+    \item Conjunctions (e.g., ``y'', ``o'', ``pero'')
+    \item Prepositions (e.g., ``de'', ``en'', ``con'')
+    \item Pronouns (in some cases)
+\end{itemize}
+
+\textbf{Detection method:} Language-specific dictionaries containing lists of words to remove.
+
+\textbf{Important considerations:}
+\begin{itemize}
+    \item Stopword removal is \textbf{not always applied}---it depends on the specific use case
+    \item Some NLP tasks may require the information provided by these words
+    \item The decision to remove stopwords should be based on the task requirements
+\end{itemize}
+
+\textbf{Example:} After tokenization and stopword removal, the sentence:
+\begin{quote}
+``Estoy contento de haber comprado este libro.''
+\end{quote}
+
+Might become: ``contento'', ``haber'', ``comprado'', ``libro'' (removing ``de'' and ``este'').
+
+\subsection{Step 3: Capitalization Treatment}
+
+\textbf{Capitalization treatment} handles uppercase letters in tokens appropriately, removing them when both uppercase and lowercase versions refer to the same word.
+
+\begin{definition}[Capitalization Treatment]
+The process of appropriately handling capitalization in tokens, removing uppercase letters when both a capitalized token and a lowercase token refer to the same word.
+\end{definition}
+
+\textbf{Problem:} Without capitalization treatment, the same word with different capitalization is treated as different tokens.
+
+\textbf{Example:} In the sentence:
+\begin{quote}
+``Días y días pasaron sin noticias nuevas.''
+\end{quote}
+
+``Días'' and ``días'' would be treated as two distinct tokens, even though they represent the same word.
+
+\textbf{Solution:} Normalize by removing capitalization, so both words are represented by the same token.
+
+\textbf{Challenge:} Capitalization removal is not always appropriate. Consider:
+\begin{quote}
+``Su amiga Estrella estaba de vacaciones, y vio una estrella en el cielo.''
+\end{quote}
+
+\begin{itemize}
+    \item ``Estrella'' (capitalized) refers to a person's name (proper noun)
+    \item ``estrella'' (lowercase) refers to a common noun (star)
+\end{itemize}
+
+Removing capitalization from ``Estrella'' would incorrectly represent both as the same token.
+
+\textbf{Approaches:}
+\begin{enumerate}
+    \item \textbf{Rule-based}: Remove capitalization only from the first word of sentences
+    \item \textbf{Sophisticated solutions}: Use Named Entity Recognition (NER) algorithms to identify tokens referring to persons, organizations, etc., preserving capitalization in those cases
+\end{enumerate}
+
+\textbf{Additional considerations:} Other normalization treatments can homogenize token representations. For example, in the first text, ``dos'' was represented as ``2''. If both representations coexist in a document (``dos'' and ``2''), they should be normalized to the same representation.
+
+\subsection{Step 4: Special Character Treatment}
+
+In some text types (e.g., tweets), non-alphanumeric characters appear (hashtags, @, etc.). The normalization pipeline must handle these characters when representing text as normalized tokens.
+
+\textbf{Approach:} In some cases, these characters can be removed (e.g., removing some exclamation marks), but this depends on:
+\begin{itemize}
+    \item The specific use case
+    \item Whether removal causes significant information loss
+\end{itemize}
+
+This step is typically called \textbf{special character treatment}.
+
+\subsection{Order of Normalization Steps}
+
+The order of normalization steps is \textbf{not always fixed}. While tokenization is typically the first step, the order of other steps can vary depending on the specific case.
+
+\textbf{Example:} For ``Principado de Asturias'', capitalization and special character treatment might occur before stopword removal, allowing detection as a named entity (place) and representation as ``Principado'' ``de'' ``Asturias'' before removing the stopword ``de''.
+
+\subsection{Lemmatization and Stemming}
+
+After the normalization steps, some use cases include obtaining the \textbf{lemma} or \textbf{root} of words.
+
+\textbf{Example:} In the text:
+\begin{quote}
+``Ayer jugaron al mismo deporte que han jugado hoy.''
+\end{quote}
+
+Two verbs appear: ``jugaron'' and ``jugado'' in different conjugations. Obtaining the lemma or root represents both with the same token.
+
+\subsubsection{Lemmatization}
+
+\textbf{Lemmatization} represents words by their lemma (canonical form). For ``jugaron'' and ``jugado'', the lemma would be ``jugar'' (to play).
+
+\textbf{Methods:}
+\begin{itemize}
+    \item Dictionaries with equivalences between words and lemmas
+    \item Other computational techniques
+\end{itemize}
+
+\subsubsection{Stemming}
+
+\textbf{Stemming} is different from lemmatization. It obtains the root (lexeme) by removing grammatical morphemes. For ``jugaron'' and ``jugado'', the stem would be ``jug''.
+
+\textbf{Algorithms:} Various algorithms exist, such as the Snowball algorithm (Porter, 2001).
+
+\begin{definition}[Lemmatization and Stemming]
+Processes that seek to simplify word representations through tokens using their lemmas or lexemes respectively.
+\end{definition}
+
+\subsubsection{Lemmatization vs. Stemming}
+
+\textbf{Problem with stemming:} Sometimes two words that should have the same representation do not.
+
+\textbf{Example:}
+\begin{itemize}
+    \item ``jugaron'' and ``yo juego'' (I play)
+    \begin{itemize}
+        \item \textbf{Lemmatization}: Both become ``jugar''
+        \item \textbf{Stemming}: ``jugaron'' $\rightarrow$ ``jug'', ``juego'' $\rightarrow$ ``jueg'' (different stems)
+    \end{itemize}
+\end{itemize}
+
+\textbf{Important consideration:} Lemmatization or stemming is \textbf{not always advisable} for all use cases, as it can cause loss of relevant information.
+
+\textbf{Example:} In the text:
+\begin{quote}
+``El número de ingenieras egresadas ha aumentado en los últimos años.''
+\end{quote}
+
+If lemmatization is applied, ``ingenieras'' and ``egresadas'' would become ``ingeniero'' and ``egresado'', losing important information about gender expressed in the text.
+
+\subsection{Final Considerations}
+
+These normalization pipelines are useful for preprocessing many texts before using them in various NLP tasks, especially when the source is raw text.
+
+\textbf{Alternative formats:} Other data formats (e.g., XML) include relevant information alongside texts, making some normalization phases unnecessary in many cases.

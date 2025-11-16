@@ -1,0 +1,76 @@
+\section{Characteristics of Text as a Data Source}
+
+In the Big Data era, large volumes of heterogeneous data are generated (images, texts, IoT device data, etc.). To work effectively with a specific data source, it is essential to understand its characteristics. This applies to texts in NLP.
+
+\subsection{Compositionality Principle}
+
+Language is \textbf{compositional} and can be treated discretely. The overall meaning of a text (e.g., a sentence) can be composed from the meaning of its elements (e.g., words).
+
+\begin{definition}[Compositionality Principle]
+The representation of a text's meaning can be obtained from the meaning of its constituent elements.
+\end{definition}
+
+\textbf{Example:}
+\begin{itemize}
+    \item ``He aprobado el examen'' (I passed the exam) combines the subject ``He aprobado'' with the predicate ``el examen''
+    \item ``He aprobado el examen tras mucho estudio'' extends the previous meaning by adding ``tras mucho estudio''
+\end{itemize}
+
+Compositionality also applies at the word level (morphology). For example, ``médicos'' (doctors) combines the root ``médico'' with ``s'' to indicate plural.
+
+\textbf{Limitations:} Compositionality alone is insufficient when dealing with:
+\begin{itemize}
+    \item \textbf{Lexical ambiguity}: Words with multiple meanings (e.g., ``banco'' can mean bank, bench, or school of fish)
+    \item \textbf{Idiomatic expressions}: Phrases whose meaning cannot be derived from individual words
+\end{itemize}
+
+\subsection{Distributional Perspective}
+
+The distributional perspective addresses compositionality limitations by constructing meaning from context.
+
+\begin{definition}[Distributional Perspective]
+The meaning of text elements (e.g., words) can be obtained in an unsupervised manner based on the context that typically surrounds them.
+\end{definition}
+
+\textbf{Example:} The meaning of ``banco'' is disambiguated by surrounding words:
+\begin{itemize}
+    \item ``... fue al banco a contratar una hipoteca'' $\rightarrow$ financial institution
+    \item ``... en el mar pude ver un banco de peces'' $\rightarrow$ school of fish
+    \item ``... ellos se sentaron en un banco de madera'' $\rightarrow$ bench
+\end{itemize}
+
+This approach is \textbf{unsupervised}---no manual annotation is required, only other texts to infer meaning from context.
+
+\subsection{Sequential Aspect}
+
+Texts have a \textbf{sequential nature} that must be considered. Compositionality and distributional perspective alone are insufficient when word order matters.
+
+\begin{definition}[Sequential Aspect]
+The sequentiality (bidirectional) of text must often be considered when constructing meaning.
+\end{definition}
+
+\textbf{Examples:}
+\begin{itemize}
+    \item ``Quiero información de hipotecas, pero no seguros'' vs. ``Quiero información de seguros, pero no hipotecas''
+    \begin{itemize}
+        \item Same words, different meanings due to word order
+    \end{itemize}
+    \item ``Al campo no he ido, he ido a la playa'' vs. ``A la playa no he ido, he ido al campo''
+    \begin{itemize}
+        \item Information appears \textit{after} the negated element (bidirectional)
+    \end{itemize}
+\end{itemize}
+
+\subsection{Syntactic Ambiguity}
+
+Some cases require considering \textbf{syntactic relationships} between words, not just compositionality, distribution, and sequence.
+
+\textbf{Example:} ``Pedro ve un cuadro de su madre'' (Pedro sees a painting of his mother)
+\begin{itemize}
+    \item Ambiguity: Does the painting belong to the mother, or does it depict the mother?
+    \item Requires syntactic analysis to resolve
+\end{itemize}
+
+\begin{definition}[Syntactic Ambiguity]
+A situation where the same sentence can have different interpretations based on syntactic structure.
+\end{definition}

@@ -1,0 +1,149 @@
+\section{Linguistic Resources}
+
+The implementation of different Natural Language Processing tasks requires various linguistic resources. Among the linguistic knowledge bases, the following stand out:
+\begin{itemize}
+    \item Dictionaries
+    \item Lexicons
+    \item Thesauri
+    \item Lexical relation databases
+\end{itemize}
+
+Additionally, collections of texts or speech resources called \textbf{corpora} (singular: \textbf{corpus}) are also important linguistic knowledge bases.
+
+\subsection{Dictionary}
+
+A \textbf{dictionary} is a repertoire where words of a language are grouped according to a specific order, accompanied by their definition or explanation. Dictionaries include a detailed and human-understandable description of the different senses of words.
+
+\textbf{Example:} A dictionary entry for ``banco'' might look like:
+\begin{quote}
+\textbf{banco} \textit{(noun)} \\
+1. A financial institution that accepts deposits and makes loans. \\
+2. A long seat for several people, typically made of wood or stone. \\
+3. A group of fish swimming together.
+\end{quote}
+
+\subsection{Lexicon}
+
+A \textbf{lexicon} is a dictionary that contains morphological information. This morphological dictionary is a repertoire that collects a list of morphemes and basic information about them.
+
+\textbf{Example:} A lexicon entry might include:
+\begin{quote}
+\textbf{cantábamos} \\
+Lexeme: \textit{cant} \\
+Morphemes: \textit{cant} + \textit{aba} + \textit{mos} \\
+Morphological information:
+\begin{itemize}
+    \item Root: \textit{cant-} (to sing)
+    \item Tense/Aspect: \textit{-aba-} (imperfect past)
+    \item Person/Number: \textit{-mos} (first person plural)
+\end{itemize}
+\end{quote}
+
+\subsection{Thesaurus}
+
+Also called \textbf{thesaurus}, \textbf{thesauri}, or \textbf{tesoro}. It refers to a dictionary that contains a list of word meanings and the relationships between these meanings.
+
+\textbf{In literature:} A thesaurus contains a list of words with their synonyms and antonyms.
+
+\textbf{In linguistics:} A thesaurus gathers knowledge about hypernymy/hyponymy and meronymy/holonymy relationships represented in the thesaurus's hierarchical structure. That is, the thesaurus hierarchy models:
+\begin{itemize}
+    \item The \textbf{is-a} relationship (hypernymy/hyponymy)
+    \item The \textbf{part-whole} relationship (meronymy/holonymy)
+\end{itemize}
+
+Additionally, a thesaurus can also group knowledge about other semantic relationships such as synonymy or antonymy.
+
+\textbf{Example (Literature):} A thesaurus entry for ``happy'':
+\begin{quote}
+\textbf{happy} \\
+Synonyms: joyful, cheerful, content, delighted, pleased \\
+Antonyms: sad, unhappy, miserable, depressed
+\end{quote}
+
+\textbf{Example (Linguistics):} A hierarchical thesaurus structure:
+\begin{quote}
+\textbf{vehicle} (hypernym) \\
+\quad $\rightarrow$ \textbf{car} (hyponym) \\
+\quad \quad $\rightarrow$ \textbf{sedan} (hyponym) \\
+\quad \quad $\rightarrow$ \textbf{SUV} (hyponym) \\
+\quad $\rightarrow$ \textbf{bicycle} (hyponym) \\
+\\
+\textbf{car} (holonym) \\
+\quad $\rightarrow$ \textbf{wheel} (meronym) \\
+\quad $\rightarrow$ \textbf{engine} (meronym) \\
+\quad $\rightarrow$ \textbf{door} (meronym)
+\end{quote}
+
+\begin{tcolorbox}[colback=blue!5!white, colframe=blue!75!black, title=\textbf{Curious Fact: Semantic Relationships}]
+\textbf{Hypernym and Hyponym} (is-a relationship):
+\begin{itemize}
+    \item A \textbf{hypernym} is a more general term that encompasses more specific terms. Example: ``vehicle'' is a hypernym of ``car''.
+    \item A \textbf{hyponym} is a more specific term that belongs to a broader category. Example: ``car'' and ``bicycle'' are hyponyms of ``vehicle''.
+    \item Relationship: ``A car \textit{is a} vehicle'' (hyponym is-a hypernym).
+\end{itemize}
+
+\textbf{Holonym and Meronym} (part-whole relationship):
+\begin{itemize}
+    \item A \textbf{holonym} is a whole that contains parts. Example: ``car'' is a holonym of ``wheel''.
+    \item A \textbf{meronym} is a part that belongs to a whole. Example: ``wheel'', ``engine'', and ``door'' are meronyms of ``car''.
+    \item Relationship: ``A wheel \textit{is part of} a car'' (meronym part-of holonym).
+\end{itemize}
+
+\textbf{Mnemonic:} Think of hypernym as ``super'' (above) and hyponym as ``sub'' (below) in a hierarchy. For holonym/meronym, remember that a ``whole'' (holonym) contains ``parts'' (meronyms).
+\end{tcolorbox}
+
+\subsection{Lexical Relation Databases}
+
+A \textbf{lexical relation database} is a generalization of thesauri---a type of dictionary that collects knowledge about any semantic relationship between word senses. These databases contain:
+\begin{itemize}
+    \item A set of lemmas
+    \item Each lemma annotated with:
+    \begin{itemize}
+        \item The possible set of senses of the word
+        \item The relationships between those senses
+    \end{itemize}
+\end{itemize}
+
+\textbf{Example:} A lexical relation database entry (similar to WordNet structure):
+\begin{quote}
+\textbf{Lemma:} \textit{car} \\
+\textbf{Synset 1:} \{car, auto, automobile, machine, motorcar\} \\
+\quad Sense: ``a motor vehicle with four wheels'' \\
+\quad Hypernym: vehicle \\
+\quad Hyponyms: sedan, SUV, coupe, convertible \\
+\quad Meronyms: wheel, engine, door, window \\
+\quad Part-of: traffic, fleet \\
+\\
+\textbf{Synset 2:} \{car, railcar, railway car, railroad car\} \\
+\quad Sense: ``a wheeled vehicle adapted to the rails of railroad'' \\
+\quad Hypernym: wheeled vehicle \\
+\quad Hyponyms: passenger car, freight car, dining car
+\end{quote}
+
+\subsection{Linguistic Corpus}
+
+A \textbf{linguistic corpus} is a collection of texts representative of a language used for linguistic analysis.
+
+\subsubsection{Types of Corpora}
+
+\textbf{Textual corpora:} Collections of extracts from books, magazines, newspapers, or any other written source.
+
+\textbf{Oral corpora:} Collections of speech, i.e., audio extracts from sources such as radio or television.
+
+\subsubsection{Tagged Corpora}
+
+Corpora can be \textbf{annotated} or \textbf{tagged} so that the words they contain present additional linguistic information, such as:
+\begin{itemize}
+    \item Syntactic information
+    \item Semantic information
+    \item Pragmatic information
+\end{itemize}
+
+These are known as \textbf{tagged corpora}.
+
+\subsubsection{Historical Development}
+
+The first corpora available online appeared in the 1960s. One of the pioneers was the \textbf{Brown Corpus}, an American English corpus developed in 1963 by Brown University, containing a collection of one million words extracted from 500 texts of different genres: newspapers, novels, non-fiction, academic, etc. (Kucera and Francis, 1967). Initially, the corpus was not tagged, but over the years it was tagged with information about grammatical categories (POS).
+
+\textbf{Modern corpora:} Today's corpora tend to be much more extensive than the Brown Corpus. For example, the \textbf{WSJ corpus} (Wall Street Journal), tagged with morphosyntactic information, is a collection of one million words published in Wall Street Journal articles in 1989.
+
